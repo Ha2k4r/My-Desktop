@@ -2,10 +2,11 @@
 set -e  # Exit on error
 
 # Packages to install NORMALLY
-packages=(firefox alacritty neovim git bluez fish)
-
-AURPackages=(hyprland hyprpaper waybar rofi-lbonn-wayland brightnessctl xdg-desktop-portal-hyprland network-manager-applet ttf-jetbrains-mono-nerd ttf-font-awesome \
-vesktop)
+packages=(firefox alacritty neovim git bluez fish hyfetch fastfetch\
+	hyprland hyprpaper waybar brightnessctl xdg-desktop-portal-hyprland network-manager-applet ttf-jetbrains-mono-nerd ttf-font-awesome \
+	plymouth)	
+AURPackages=(rofi-lbonn-wayland \
+	vesktop)
 
 # Colors for output (optional, just for readability)
 
@@ -30,7 +31,7 @@ install_package() {
         log "${GREEN}Installing $1..."
         sudo pacman -S --noconfirm "$1"
     else
-        log "${YELLOW}is already installed."
+        log "${YELLOW}$1 is already installed."
     fi
 }
 
@@ -118,7 +119,7 @@ for package in "${packages[@]}"; do
 	    fi
             ;;
 	fish)
-		if [[ "$(basename "$SHELL")" != "fish" ]]; then
+		if [[ $SHELL != $(which fish) ]]; then
                 	log "Changing shell to Fish..."
                 	chsh -s "$(which fish)"
 		else 
