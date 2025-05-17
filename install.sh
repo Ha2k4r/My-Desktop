@@ -2,11 +2,11 @@
 set -e  # Exit on error
 
 # Packages to install NORMALLY
-packages=(firefox alacritty neovim git bluez fish hyfetch fastfetch\
-	hyprland hyprpaper waybar brightnessctl xdg-desktop-portal-hyprland network-manager-applet ttf-jetbrains-mono-nerd ttf-font-awesome \
-	plymouth)	
-AURPackages=(rofi-lbonn-wayland \
-	vesktop)
+packages=(alacritty pavucontrol arduino-ide git bluez fish hyfetch fastfetch prismlauncher nano steam-native-runtime \
+	hyprland waybar brightnessctl xdg-desktop-portal-hyprland network-manager-applet ttf-jetbrains-mono-nerd ttf-font-awesome \
+	plymouth steam-native-runtime )	
+AURPackages=(rofi-theme-applet-1080p mpvpaper\
+	vesktop brave-bin)
 
 # Colors for output (optional, just for readability)
 
@@ -56,7 +56,7 @@ Install_YAY() {
         makepkg -si --noconfirm
         popd > /dev/null
         rm -rf "$tempdir"
-        
+
         log "${GREEN}yay installed successfully."
     else
         log "${YELLOW}yay is already installed."
@@ -119,12 +119,51 @@ for package in "${packages[@]}"; do
 	    fi
             ;;
 	fish)
-		if [[ $SHELL != $(which fish) ]]; then
+		if [[ $SHELL != "/usr/bin/fish" ]]; then
                 	log "Changing shell to Fish..."
-                	chsh -s "$(which fish)"
-		else 
+                	chsh -s /usr/bin/fish
+		else
 			log "${YELLOW}Shell is already Fish"
 		fi
+             ;;
+	alacritty)
+		log "${PURPLE}Running interactive terminal theme selector. My personal recomendation is : Terminal-App"
+		npx alacritty-themes
+		alacritty migrate
 	;;
+	rofi-theme-applet-1080p)
+		log "${PURPLE}Running interactive ROFI theme selector. My personal recomendation is : Arthur"
+		rofi-theme-selector
+	;;
+	arduino-ide)
+		log "${NC}Configuring arduino-ide.."
+		sudo usermod -a -G uucp $USER
+    esac
+done
+
+
+for package in "${AURPackages[@]}"; do
+    case "$package" in
+        rofi-theme-applet-1080p)
+                log "${PURPLE}Running interactive ROFI theme selector. My personal recomendation is : Arthur"
+                rofi-theme-selector
+		
+		#configure a button press to activate the mainmod to launch programs
+		touch "/home/$USER/.config/hypr/mainMod.sh"
+		echo '#!/usr/bin/env bash
+		# ~/.local/bin/launcher-toggle.sh
+
+		LAUNCHER="rofi"
+
+		if pgrep -x $LAUNCHER > /dev/null; then
+  		pkill $LAUNCHER
+		else
+		# launch in background so Hyprland doesn’t block
+		   $LAUNCHER -show drun &
+		fi' > "/home/$USER/.config/hypr/mainMod.sh"
+		
+		chmod +x /home/$USER/.config/hypr/mainMod.sh
+
+        ;;
     esac
 done
