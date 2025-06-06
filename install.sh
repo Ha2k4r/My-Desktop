@@ -166,4 +166,11 @@ for package in "${AURPackages[@]}"; do
   esac
 done
 SCRIPT_DIR=$(dirname "$(realpath "$0")")
-mv -f "$SCRIPT_DIR"/src/* "$HOME/.config/hypr/"
+mv -f "$SCRIPT_DIR"/src/hypr* "$HOME/.config/hypr/"
+
+sudo mv -f "$SCRIPT_DIR"/src/fish/weatherService* "/etc/systemd/system/"
+
+sudo systemctl daemon-reexec && sudo systemctl daemon-reload
+sudo systemctl enable --now weather-fetch.timer
+
+mv -f "$SCRIPT_DIR"/src/fish/* "$HOME/.config/fish/"

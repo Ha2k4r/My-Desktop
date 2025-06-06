@@ -1,0 +1,8 @@
+[Unit]
+Description=Fetch weather data
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/home/youruser/scripts/fetch_weather.sh
