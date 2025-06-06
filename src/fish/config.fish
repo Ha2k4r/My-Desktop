@@ -1,5 +1,5 @@
 if status is-interactive
-   bash ~/display_weather.sh
+   bash display_weather.sh
    alias vim="nvim"
 end
 
