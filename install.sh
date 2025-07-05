@@ -169,6 +169,9 @@ SCRIPT_DIR=$(dirname "$(realpath "$0")")
 mv -f "$SCRIPT_DIR"/src/hypr* "$HOME/.config/hypr/"
 
 sudo mv -f "$SCRIPT_DIR"/src/fish/weatherService* "/etc/systemd/system/"
+sudo mv -f "$SCRIPT_DIR"/src/fish/WeatherFetchBIN* "/usr/bin/"
+
+sudo chmod +x "/usr/bin/fetch_weather.sh"
 
 sudo systemctl daemon-reexec && sudo systemctl daemon-reload
 sudo systemctl enable --now weather-fetch.timer
