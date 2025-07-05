@@ -5,4 +5,7 @@ Wants=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart=/home/youruser/scripts/fetch_weather.sh
+ExecStart=/usr/bin/fetch_weather.sh
+
+[Install]
+WantedBy=multi-user.target
