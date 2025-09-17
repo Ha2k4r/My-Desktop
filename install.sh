@@ -3,10 +3,10 @@
 set -e # Exit on error
 
 # Packages to install NORMALLY
-packages=(alacritty dosfstools cups pavucontrol arduino-ide git bluez fish hyfetch fastfetch prismlauncher nano steam-native-runtime
+packages=(dosfstools cups pavucontrol arduino-ide git bluez fish fastfetch nano steam-native-runtime
   hyprland waybar brightnessctl xdg-desktop-portal-hyprland network-manager-applet ttf-jetbrains-mono-nerd ttf-font-awesome
-  plymouth steam-native-runtime)
-AURPackages=(rofi-theme-applet-1080p mpvpaper vesktop)
+  plymouth steam-native-runtime kitty hyprpaper)
+AURPackages=(rofi-theme-applet-1080p vesktop)
 
 # Colors for output (optional, just for readability)
 
