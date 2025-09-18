@@ -183,4 +183,6 @@ sudo systemctl enable --now weather-fetch.timer
 cp -rf "$SCRIPT_DIR"/src/fish/* "$HOME/.config/fish/"
 
 sudo cp -f "$SCRIPT_DIR"/src/waybar/config.jsonc "/etc/xdg/waybar/"
+
 sudo cp -f "$SCRIPT_DIR"/src/waybar/style.css "/etc/xdg/waybar/"
+cp -rf "$SCRIPT_DIR"/src/kitty/kitty.conf ~/.config/kitty/
