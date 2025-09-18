@@ -1,9 +1,9 @@
 #!/bin/bash
 #/run/media/fur3/Ventoy
-set -e # Exit on error
+#set -e # Exit on error
 
 # Packages to install NORMALLY
-packages=(dosfstools cups pavucontrol arduino-ide git bluez fish fastfetch nano steam-native-runtime
+packages=(bc jq dosfstools cups pavucontrol arduino git bluez fish fastfetch nano steam-native-runtime
   hyprland waybar brightnessctl xdg-desktop-portal-hyprland network-manager-applet ttf-jetbrains-mono-nerd ttf-font-awesome
   plymouth steam-native-runtime kitty hyprpaper)
 AURPackages=(rofi-theme-applet-1080p vesktop)
@@ -166,14 +166,16 @@ for package in "${AURPackages[@]}"; do
   esac
 done
 SCRIPT_DIR=$(dirname "$(realpath "$0")")
-mv -f "$SCRIPT_DIR"/src/hypr* "$HOME/.config/hypr/"
+rm -rf "$HOME/.config/hypr/"
+cp -rf "$SCRIPT_DIR"/src/hypr* "$HOME/.config/"
 
-sudo mv -f "$SCRIPT_DIR"/src/fish/weatherService* "/etc/systemd/system/"
-sudo mv -f "$SCRIPT_DIR"/src/fish/WeatherFetchBIN* "/usr/bin/"
+sudo cp -f "$SCRIPT_DIR"/src/fish/weatherService/weather-fetch.service "/etc/systemd/system/"
+sudo cp -f "$SCRIPT_DIR"/src/fish/weatherService/weather-fetch.timer "/etc/systemd/system/"
+sudo cp -f "$SCRIPT_DIR"/src/fish/WeatherFetchBIN/fetch_weather.sh "/usr/bin/"
 
 sudo chmod +x "/usr/bin/fetch_weather.sh"
 
 sudo systemctl daemon-reexec && sudo systemctl daemon-reload
 sudo systemctl enable --now weather-fetch.timer
 
-mv -f "$SCRIPT_DIR"/src/fish/* "$HOME/.config/fish/"
+cp -rf "$SCRIPT_DIR"/src/fish/* "$HOME/.config/fish/"
