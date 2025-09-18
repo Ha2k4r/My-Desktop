@@ -6,7 +6,7 @@
 packages=(bc jq dosfstools cups pavucontrol arduino git bluez fish fastfetch nano steam-native-runtime
   hyprland waybar brightnessctl xdg-desktop-portal-hyprland network-manager-applet ttf-jetbrains-mono-nerd ttf-font-awesome
   plymouth steam-native-runtime kitty hyprpaper)
-AURPackages=(rofi-theme-applet-1080p vesktop)
+AURPackages=(rofi-theme-applet-1080p waybar-module-pacman-updates vesktop)
 
 # Colors for output (optional, just for readability)
 
@@ -175,7 +175,12 @@ sudo cp -f "$SCRIPT_DIR"/src/fish/WeatherFetchBIN/fetch_weather.sh "/usr/bin/"
 
 sudo chmod +x "/usr/bin/fetch_weather.sh"
 
+log "${GREEN}Finishing up now.."
+
 sudo systemctl daemon-reexec && sudo systemctl daemon-reload
 sudo systemctl enable --now weather-fetch.timer
 
 cp -rf "$SCRIPT_DIR"/src/fish/* "$HOME/.config/fish/"
+
+sudo cp -f "$SCRIPT_DIR"/src/waybar/config.jsonc "/etc/xdg/waybar/"
+sudo cp -f "$SCRIPT_DIR"/src/waybar/style.css "/etc/xdg/waybar/"
