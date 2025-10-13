@@ -10,10 +10,10 @@
 # Packages
 
 # Removing these may break individual apps but some of these are nice to haves that i always use for development and general use
-packages=(bc jq dosfstools cups pavucontrol arduino git bluez fish fastfetch nano waybarbrightnessctl plymouth steam-native-runtime kitty rofi dunst libnotify inotify-tools wget acpid swaybg
-	slurp grim playerctl imagemagick gammastep kdeconnect iproute2 sway-contrib)
+packages=(zip unzip bc jq dosfstools cups pavucontrol arduino git bluez fish fastfetch nano waybar brightnessctl plymouth steam-native-runtime kitty rofi dunst libnotify inotify-tools wget acpid swaybg
+	slurp grim playerctl imagemagick gammastep kdeconnect iproute2 sway-contrib xorg-xrdb xdg-desktop-portal)
 
-AURPackages=(vesktop swayfx i3ipc eww light)
+AURPackages=(vesktop swayfx i3ipc eww light networkmanager-iwd)
 
 # Set some colors for output messages
 OK="$(tput setaf 2)[OK]$(tput sgr0)"
@@ -144,17 +144,44 @@ done
 
 curl -L -o /tmp/tmpfont.zip 'https://www.dropbox.com/scl/fi/fcjwlalz1zq19a05tdw0f/elenapan-dotfiles-fonts.zip?dl=0&e=1&rlkey=uljkjoyi5qipi6hc9ju9ibk4o&st=zwqrvroc'
 
-unzip -d ~/.local/share/fonts ~/tmp/tmpfont.zip
+unzip -d ~/.local/share/fonts tmp/tmpfont.zip
 
 fc-cache -v
 
 # Installing the dotfiles
 
-git clone https://github.com/elenapan/dotfiles
+#git clone https://github.com/elenapan/dotfiles
 
-cd dotfiles
+#cd dotfiles
 
-cp -r config/{sway,eww,dunst,fontconfig,kitty,rofi} ~/.config
+#cp -r config/{sway,eww,dunst,fontconfig,kitty,rofi} ~/.config
 
 # Wallpaper
-curl --output ~/.local/share/wallpaper https://i.redd.it/zz55pru3ee0f1.png
+#curl --output ~/.local/share/wallpaper https://i.redd.it/zz55pru3ee0f1.png
+
+
+
+# Hyprland Dotfiles
+
+SCRIPT_DIR=$(dirname "$(realpath "$0")")
+
+rm -rf "$HOME/.config/hypr/"
+cp -rf "$SCRIPT_DIR"/src/hypr* "$HOME/.config/"
+
+#sudo cp -f "$SCRIPT_DIR"/src/fish/weatherService/weather-fetch.service "/etc/systemd/system/"
+#sudo cp -f "$SCRIPT_DIR"/src/fish/weatherService/weather-fetch.timer "/etc/systemd/system/"
+#sudo cp -f "$SCRIPT_DIR"/src/fish/WeatherFetchBIN/fetch_weather.sh "/usr/bin/"
+
+#sudo chmod +x "/usr/bin/fetch_weather.sh"
+
+#log "${GREEN}Finishing up now.."
+
+#sudo systemctl daemon-reexec && sudo systemctl daemon-reload
+#sudo systemctl enable --now weather-fetch.timer
+
+#cp -rf "$SCRIPT_DIR"/src/fish/* "$HOME/.config/fish/"
+
+#sudo cp -f "$SCRIPT_DIR"/src/waybar/config.jsonc "/etc/xdg/waybar/"
+
+#sudo cp -f "$SCRIPT_DIR"/src/waybar/style.css "/etc/xdg/waybar/"
+#cp -rf "$SCRIPT_DIR"/src/kitty/kitty.conf ~/.config/kitty/
