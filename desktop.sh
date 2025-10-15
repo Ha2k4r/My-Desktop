@@ -10,10 +10,10 @@
 # Packages
 
 # Removing these may break individual apps but some of these are nice to haves that i always use for development and general use
-packages=(zip unzip bc jq dosfstools cups pavucontrol arduino git bluez fish fastfetch nano waybar brightnessctl plymouth steam-native-runtime kitty rofi dunst libnotify inotify-tools wget acpid swaybg
-	slurp grim playerctl imagemagick gammastep kdeconnect iproute2 sway-contrib xorg-xrdb xdg-desktop-portal)
+packages=(swaync firefox hyprland zip unzip bc jq dosfstools cups pavucontrol arduino git bluez fish fastfetch nano waybar brightnessctl plymouth hyprlock kitty rofi dunst libnotify inotify-tools wget acpid swaybg
+	slurp grim playerctl gammastep kdeconnect iproute2 xdg-desktop-portal-hyprland)
 
-AURPackages=(vesktop swayfx i3ipc eww light networkmanager-iwd)
+AURPackages=(vesktop)
 
 # Set some colors for output messages
 OK="$(tput setaf 2)[OK]$(tput sgr0)"
@@ -114,7 +114,7 @@ for package in "${packages[@]}"; do
   fish)
     if [[ $SHELL != "/usr/bin/fish" ]]; then
       echo "${GREEN}Changing shell to Fish...${RESET}"
-      chsh -s /usr/bin/fish
+      sudo chsh -s /usr/bin/fish
     else
       echo "${NOTE}Shell is already Fish${RESET}"
     fi
@@ -157,7 +157,8 @@ fc-cache -v
 #cp -r config/{sway,eww,dunst,fontconfig,kitty,rofi} ~/.config
 
 # Wallpaper
-#curl --output ~/.local/share/wallpaper https://i.redd.it/zz55pru3ee0f1.png
+#mkdir Pictures Pictures/wallpapers/
+#curl --output ~/Pictures/wallpapers/ https://i.redd.it/zz55pru3ee0f1.png
 
 
 
@@ -181,7 +182,7 @@ cp -rf "$SCRIPT_DIR"/src/hypr* "$HOME/.config/"
 
 #cp -rf "$SCRIPT_DIR"/src/fish/* "$HOME/.config/fish/"
 
-#sudo cp -f "$SCRIPT_DIR"/src/waybar/config.jsonc "/etc/xdg/waybar/"
+sudo cp -f "$SCRIPT_DIR"/src/waybar/config.jsonc "/etc/xdg/waybar/"
 
-#sudo cp -f "$SCRIPT_DIR"/src/waybar/style.css "/etc/xdg/waybar/"
+sudo cp -f "$SCRIPT_DIR"/src/waybar/style.css "/etc/xdg/waybar/"
 #cp -rf "$SCRIPT_DIR"/src/kitty/kitty.conf ~/.config/kitty/
