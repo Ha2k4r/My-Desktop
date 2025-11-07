@@ -11,9 +11,9 @@
 
 # Removing these may break individual apps but some of these are nice to haves that i always use for development and general use
 packages=(krita swaync firefox hyprland zip unzip bc jq dosfstools cups pavucontrol arduino git bluez fish fastfetch nano waybar brightnessctl plymouth hyprlock kitty rofi dunst libnotify inotify-tools wget acpid swaybg
-	slurp grim playerctl gammastep kdeconnect iproute2 xdg-desktop-portal-hyprland)
+	slurp grim playerctl gammastep kdeconnect iproute2 xdg-desktop-portal-hyprland libreoffice)
 
-AURPackages=(vesktop)
+AURPackages=(vesktop alvr-bin)
 
 # Set some colors for output messages
 OK="$(tput setaf 2)[OK]$(tput sgr0)"
