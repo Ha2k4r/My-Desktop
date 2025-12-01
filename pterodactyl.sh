@@ -187,7 +187,7 @@ check_yay_installed() {
 	 exit 0
         fi 
       else
-        echo "yay not found – installing..."
+        log "yay not found – installing..."
 	install_yay
       fi
     fi
