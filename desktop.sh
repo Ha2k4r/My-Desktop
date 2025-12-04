@@ -309,6 +309,9 @@ chmod +x ~/.config/hypr/scripts/*
 #Rofi Config
 sudo mkdir -p /etc/xdg/rofi/
 sudo cp -rf "$SCRIPT_DIR"/src/rofi/config.rasi /etc/xdg/rofi/
+
+#pywal-hyprland support
+cp -rf "$SCRIPT_DIR"/src/pywal/hyprland-colors.conf "$HOME/.cache/wal/"
 }
 
 
