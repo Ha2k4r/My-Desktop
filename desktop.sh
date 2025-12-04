@@ -305,6 +305,10 @@ cp -rf "$SCRIPT_DIR"/src/kitty/kitty.conf ~/.config/kitty/
 
 #make scripts executable
 chmod +x ~/.config/hypr/scripts/*
+
+#Rofi Config
+sudo mkdir -p /etc/xdg/rofi/
+sudo cp -rf "$SCRIPT_DIR"/src/rofi/config.rasi /etc/xdg/rofi/
 }
 
 
