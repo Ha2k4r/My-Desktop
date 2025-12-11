@@ -111,7 +111,7 @@ parse_arguments() {
     case "$1" in
     --help | -h | help)
       # Return this message and exit
-      echo -e "This script installs $name_of_program a open-source game management panel to your device.
+      echo -e "This script installs my dotfiles to your device :3
 usage: PROGRAM {Flags..}
 
 Valid Flags:
