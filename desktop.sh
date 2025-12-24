@@ -223,7 +223,7 @@ install_aur_package() {
 }
 implementation() {
   #Things to install
-  packages=(swww hyprpolkitagent krita swaync firefox hyprland zip unzip bc jq dosfstools cups pavucontrol arduino git bluez fish fastfetch nano waybar brightnessctl plymouth hyprlock kitty rofi dunst libnotify inotify-tools wget acpid swaybg slurp playerctl gammastep kdeconnect iproute2 xdg-desktop-portal-hyprland libreoffice)
+  packages=(swww hyprpolkitagent krita swaync firefox hyprland zip unzip socat bc jq dosfstools cups pavucontrol arduino git bluez fish fastfetch nano waybar brightnessctl plymouth hyprlock kitty rofi dunst libnotify inotify-tools wget acpid swaybg slurp playerctl gammastep kdeconnect iproute2 xdg-desktop-portal-hyprland libreoffice)
 
   AURPackages=(python-pywal vesktop alvr-bin)
 
