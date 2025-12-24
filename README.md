@@ -1,4 +1,4 @@
-![](https://img.shields.io/github/last-commit/Ha2k4r/My-Desktop?style=for-the-badge&logo=git&color=violet)
+![](https://img.shields.io/github/last-commit/Ha2k4r/My-Desktop?style=for-the-badge&logo=git&logoColor=D9E0EE&labelColor=1E202B&color=8ad7eb)
 
 
 THIS IS A WIP
