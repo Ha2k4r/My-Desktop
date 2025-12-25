@@ -22,6 +22,3 @@ swww img "$wallpaper"
 
 # Generate colors with pywal
 wal -i $wallpaper
-
-# Start Waybar
-waybar &
