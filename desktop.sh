@@ -1,16 +1,17 @@
-#! /bin/bash
+#!/usr/bin/env bash
 
-creator_line1=' _____ _        _           ______ _      _     '
-creator_line2='/  ___| |      | |          | ___ (_)    | |    '
-creator_line3='\ `--.| |_ ___ | | __ _ ___ | |_/ /_ _ __| |__  '
-creator_line4=' `--. \ __/ _ \| |/ _` / __|| ___ \ | .__| |_ \ '
-creator_line5='/\__/ / || (_) | | (_| \__ \| |_/ / | |  | |_) |'
-creator_line6='\____/ \__\___/|_|\__,_|___/\____/|_|_|  |_.__/ '
-creator_line7='trans rights! yes, but my coding is a trans wrong
-'
+creator_art=(
+'    ▄▄▄                    '
+'   ██▀▀█▄                  '
+'   ██ ▄█▀ ▄                '
+'   ██▀▀█▄ ████▄ ██ ██ ██ ██'
+' ▄ ██  ▄█ ██ ██ ██ ██ ██▄██'
+' ▀██████▀▄██ ▀█▄▀██▀█▄▄▀██▀'
+'                        ██ '
+'           :3         ▀▀▀ '
+)
 
-#ehh, makes it a lil easyer to reuse my template
-name_of_program='Pteradactyl'
+# Message to display at the end of the program
 goodbye_message='Thank you for using my program, goodbye, and have a great day!'
 
 #defaults
@@ -68,6 +69,8 @@ else
   WHITE=""
   C_RESET=""
 fi
+# Default Color Palette
+palette=("$Blue" "$MAGENTA" "$WHITE" "$MAGENTA" "$Blue")
 
 log() {
   local msg="$1"
@@ -93,8 +96,8 @@ log() {
 }
 
 error() {
-  #ignores silent argument parse and prints in a nicely formated way
-  log "${RED}[ERROR] $*" force
+  # ignores the program being run in quiet/silent and prints in a nicely formated way
+  log "${RED}[ERROR] ${C_RESET}$*" force
 }
 
 #functions area
@@ -103,8 +106,9 @@ parse_arguments() {
     case "$1" in
     --help | -h | help)
       # Return this message and exit
-      echo -e "This script installs $name_of_program a open-source game management panel to your device.
-usage: PROGRAM {Flags..}
+      echo -e "This script installs Bnuy's hyprland dotfiles for archlinux. :3
+
+usage: $0 {Flags..}
 
 Valid Flags:
 -h,  --help,    shows this menu and exits
@@ -112,7 +116,7 @@ Valid Flags:
 --nochecks,     Does not perform system safety checks and runs blindly
 -nc, --nocolor, Does not show colored output :(
 -q, --quiet,    Silences non required information
--v, --verbose,  Output has timestamps"
+-v, --verbose,  Output includes timestamps"
       exit 0
       ;;
     --noconfirm)
@@ -123,7 +127,7 @@ Valid Flags:
       nochecks=true
       shift
       ;;
-    --nc | --nocolor | --nocolors)
+    -nc | --nocolor | --nocolors)
       nocolor=true
       shift
       ;;
@@ -137,7 +141,7 @@ Valid Flags:
       ;;
     *)
       error "unexpected argument : '${*}' found
-usage PROGRAM [Flags]
+usage $0 {Flags..}
 for more information, try '--help'"
       exit 1
       ;;
@@ -308,32 +312,51 @@ modify_system_dialog() {
 Please enter 'N' to exit or 'Y' to continue. "; then
       return 0
     else
-      error "User denied action. Exiting."
+      error "User denied action.  Script Exited"
       exit 1
     fi
   else
     return 0
   fi
 }
-print_creator() {
-  log "
-${BLUE}$creator_line1
-${MAGENTA}$creator_line2
-${WHITE}$creator_line3
-${WHITE}$creator_line4
-${MAGENTA}$creator_line5
-${BLUE}$creator_line6
-${GREEN}$creator_line7"
+
+print_art() {
+  # Pointers to params
+  local -n art=$1
+  # Find how large our working terminal is
+  terminal_width=$(tput cols)
+  # The array of art we manipulate here
+  raw=()
+
+  # Find largest width of the art
+  max_width=0
+  for line in "${art[@]}"; do
+    (( ${#line} > max_width )) && max_width=${#line}
+  done
+
+  # Center the art on the screen
+  for line in "${art[@]}"; do
+    padded=$(printf "%-*s" "$max_width" "$line")
+    (( max_width >= terminal_width )) && pad=0 || pad=$(( (terminal_width - max_width) / 2 ))
+    raw+=( "$(printf "%*s%s" "$pad" "" "$padded")" )
+  done
+
+  # Apply color to the art array and print line by line
+  for i in "${!raw[@]}"; do
+    color="${palette[i % ${#palette[@]}]}"
+    log "${color}${raw[i]}"
+  done
 }
 
 main() {
   parse_arguments "$@"
   check_root
   check_operating_system
+  print_art creator_art
   modify_system_dialog
   implementation
-  print_creator
-
-  log "${GREEN}$goodbye_message"
+  
+  palette=("$MAGENTA")
+  print_art goodbye_message
 }
 main "$@"
