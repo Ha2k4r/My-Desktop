@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 
 creator_art=(
-'    ▄▄▄                    '
-'   ██▀▀█▄                  '
-'   ██ ▄█▀ ▄                '
-'   ██▀▀█▄ ████▄ ██ ██ ██ ██'
-' ▄ ██  ▄█ ██ ██ ██ ██ ██▄██'
-' ▀██████▀▄██ ▀█▄▀██▀█▄▄▀██▀'
-'                        ██ '
-'           :3         ▀▀▀ '
+  "    ▄▄▄                    "
+  "   ██▀▀█▄                  "
+  "   ██ ▄█▀ ▄                "
+  "   ██▀▀█▄ ████▄ ██ ██ ██ ██"
+  " ▄ ██  ▄█ ██ ██ ██ ██ ██▄██"
+  " ▀██████▀▄██ ▀█▄▀██▀█▄▄▀██▀"
+  "                        ██ "
+  "           :3         ▀▀▀ "
 )
 
 # Message to display at the end of the program
-goodbye_message='Thank you for using my program, goodbye, and have a great day!'
+goodbye_message="Thank you for using my program, goodbye, and have a great day!"
 
 #defaults
 noconfirm=false
@@ -70,7 +70,7 @@ else
   C_RESET=""
 fi
 # Default Color Palette
-palette=("$Blue" "$MAGENTA" "$WHITE" "$MAGENTA" "$Blue")
+palette=("$BLUE" "$MAGENTA" "$WHITE" "$MAGENTA")
 
 log() {
   local msg="$1"
@@ -308,7 +308,7 @@ implementation() {
 
 modify_system_dialog() {
   if !($noconfirm); then
-    if prompt_user "This script will modify your System, and install $name_of_program. 
+    if prompt_user "This script will modify your System, and install Bnuy's hyprland dotfiles.
 Please enter 'N' to exit or 'Y' to continue. "; then
       return 0
     else
@@ -331,14 +331,14 @@ print_art() {
   # Find largest width of the art
   max_width=0
   for line in "${art[@]}"; do
-    (( ${#line} > max_width )) && max_width=${#line}
+    ((${#line} > max_width)) && max_width=${#line}
   done
 
   # Center the art on the screen
   for line in "${art[@]}"; do
     padded=$(printf "%-*s" "$max_width" "$line")
-    (( max_width >= terminal_width )) && pad=0 || pad=$(( (terminal_width - max_width) / 2 ))
-    raw+=( "$(printf "%*s%s" "$pad" "" "$padded")" )
+    ((max_width >= terminal_width)) && pad=0 || pad=$(((terminal_width - max_width) / 2))
+    raw+=("$(printf "%*s%s" "$pad" "" "$padded")")
   done
 
   # Apply color to the art array and print line by line
@@ -352,10 +352,12 @@ main() {
   parse_arguments "$@"
   check_root
   check_operating_system
+  # Default Color Palette
+  palette=("$BLUE" "$BLUE" "$MAGENTA" "$WHITE" "$MAGENTA")
   print_art creator_art
   modify_system_dialog
   implementation
-  
+
   palette=("$MAGENTA")
   print_art goodbye_message
 }
